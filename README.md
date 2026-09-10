@@ -26,15 +26,24 @@ Sigue estos pasos para clonar el repositorio y levantar el proyecto localmente:
 
 3. **Instalar las dependencias:**
    ```bash
-   npm install
+   pnpm install
    ```
 
 4. **Ejecutar el servidor de desarrollo:**
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
-5. **Ver la aplicación:**
+5. **Construir para producción (Build):**
+   ```bash
+   pnpm build
+   ```
+   Para iniciar el servidor en modo de producción una vez construido:
+   ```bash
+   pnpm start
+   ```
+
+6. **Ver la aplicación:**
    Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la página cargada.
 
 ---
@@ -51,3 +60,22 @@ Dentro del directorio `my-app/app/`, hemos organizado el proyecto con la siguien
 - **`services/`**: Lógica de integración y conexión con el Backend (APIs). Aquí se centralizan las peticiones HTTP (`fetch` o `axios`).
 - **`types/`**: Archivos de definición de tipos e interfaces de TypeScript. Sirven para definir qué forma tendrán nuestros objetos y datos en todo el proyecto.
 - **`utils/`**: Funciones auxiliares o de utilidad (helpers). Por ejemplo: funciones para dar formato a fechas, validaciones de texto, calculadoras, etc.
+
+---
+
+## 🐶 Husky (Git Hooks)
+
+Este proyecto utiliza **Husky** para asegurar que el código cumpla con ciertos estándares antes de hacer commits o subir cambios al repositorio.
+
+Dado que nuestro código principal se encuentra en la subcarpeta `my-app` pero el repositorio `.git` está en la raíz, Husky ha sido configurado para enlazar automáticamente los hooks desde el `package.json` de `my-app`.
+
+### ¿Cómo configurarlo en tu máquina local?
+
+Cuando clonaste el proyecto y corriste `pnpm install` dentro de `my-app`, el script `prepare` automáticamente configuró Husky en tu entorno local. Si alguna vez necesitas inicializarlo de nuevo manualmente, solo debes ejecutar:
+
+```bash
+cd my-app
+pnpm run prepare
+```
+
+Esto generará/conectará la carpeta `.husky` y le indicará a Git dónde buscar los hooks (ej. pre-commit).
